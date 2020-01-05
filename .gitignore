@@ -67,5 +67,8 @@ ENV/
 
 # and more
 .vscode
+
+.env.json
+
 credentials.json
 token.pickle

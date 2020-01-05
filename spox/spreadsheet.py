@@ -9,6 +9,10 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 
+def get_range(lang_list):
+    pass
+
+
 def sheets_api(creds):
     service = build('sheets', 'v4', credentials=creds)
     # Call the Sheets API
