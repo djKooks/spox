@@ -1,14 +1,11 @@
 from __future__ import print_function
-import pickle
-import os.path
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 
+from reader import Reader
 from env import read_env
 from spreadsheet import get_range, credential, sheets_api
 
 # The ID and range of a sample spreadsheet.
+
 SAMPLE_SPREADSHEET_ID = '1lvtD-DPzNiy8iih9qgCcQoyyLBoCmbFgJ6DRdNR2hMk'
 
 # Define Range
@@ -21,16 +18,16 @@ def main():
     Prints values from a sample spreadsheet.
     """
     env = read_env()
-    creds = credential(env['credential_file_path'])
-    get_range(env['lang'])
+    lang_list = get_range(env['lang'])
+    # print(lang_list)
     # Call the Sheets API
-    sheet = sheets_api(creds)
-    
-    # sheet_range = 
+    sheet = sheets_api(credential(env['credential_file_path']))
 
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
-    print(result)
+    # print(result)
+    reader = Reader(result)
+    print(reader.get_column_info())
     '''
     values = result.get('values', [])
 
@@ -42,6 +39,7 @@ def main():
             # Print columns A and E, which correspond to indices 0 and 4.
             print('%s, %s' % (row[0], row[4]))
     '''
+
 
 if __name__ == '__main__':
     main()
