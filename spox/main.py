@@ -25,9 +25,10 @@ def main():
 
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
-    # print(result)
+    print(result)
     reader = Reader(result)
-    print(reader.get_column_info())
+    # print(reader.get_column_info())
+    print(reader.get_lang_by_column('ko'))
     '''
     values = result.get('values', [])
 
