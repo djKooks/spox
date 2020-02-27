@@ -18,17 +18,19 @@ def main():
     Prints values from a sample spreadsheet.
     """
     env = read_env()
+    print('start main')
     lang_list = get_range(env['lang'])
-    # print(lang_list)
-    # Call the Sheets API
     sheet = sheets_api(credential(env['credential_file_path']))
 
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
     print(result)
+
     reader = Reader(result)
     # print(reader.get_column_info())
-    print(reader.get_lang_by_column('ko'))
+    # print(reader.get_lang_by_column('ko'))
+
+
     '''
     values = result.get('values', [])
 
